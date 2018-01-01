@@ -21,5 +21,5 @@ EOF
   
   
 oc expose service alertmanager
-route="`oc get routes -n openshift-metrics alertmanager | grep alertmanager | awk  '{print $2}'`"
+route="$(oc get routes -n openshift-metrics alertmanager --template='{{ .spec.host }}')"
 echo "Try accessing $route"
