@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cat <<EOF | oc create -n openshift-metrics -f - 
 apiVersion: v1
 kind: Service
