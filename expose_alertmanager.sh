@@ -1,4 +1,4 @@
-cat <<EOF | oc create -n -f - 
+cat <<EOF | oc create -n openshift-metrics -f - 
 apiVersion: v1
 kind: Service
 metadata:
@@ -17,8 +17,9 @@ spec:
   type: ClusterIP
 status:
   loadBalancer: {}
-EOF  
+EOF
   
   
 oc expose service alertmanager
-oc get routes --all-namespaces | grep alertmanager
+route="`oc get routes -n openshift-metrics alertmanager | grep alertmanager | awk  '{print $2}'`"
+echo "Try accessing $route"
